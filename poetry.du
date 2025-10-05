@@ -1,0 +1,58 @@
+#builtin STRING_CONCAT concat
+
+inLine "hello".
+inLine "world".
+
+inLine "a grapevine and joyous music".
+inLine "and soap that smells like nonna's house".
+inLine "the joy is not in the knowing".
+inLine "it is in the finding-out".
+
+inLine "leave the leaves, please!".
+inLine "goatnip".
+inLine "grape vines".
+inLine "beer steins".
+inLine "dance line".
+inLine "sit by the Rhine".
+
+inLine "cat jumped over greek island crete grape leaves".
+inLine "and dove to capture the oyster".
+
+inLine "unhollow and arborial".
+inLine "and tertiarily striated".
+inLine "in green and yellow and brown".
+inLine "and all the colors".
+inLine "of conversation and light".
+
+rhymes "vines" "lines".
+rhymes "vines" "steins".
+rhymes "Rhine" "vines".
+
+
+fragment "climbing".
+fragment "full".
+fragment "supported".
+fragment "twining".
+fragment "whispering".
+fragment "fragrance".
+
+fragment (done L) :- inLine L.
+split (start F1) (done F2) 
+  :- fragment (done F), concat F1 " " F2 is F.
+split F1 F2
+  :- fragment (start F), concat F1 " " F2 is F.
+fragment (start F) :- split F _.
+fragment (done F) :- split _ (done F).
+
+index 0.
+index 1.
+index 2.
+index 3.
+index 4.
+index 5.
+index 6.
+index 7.
+index 8.
+
+line I is? (concat F1 " " F2) :- fragment F1, fragment (done F2), index I.
+
